@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Roblox</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: #111;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 42px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #aaa;
+        font-size: 17px;
+    }
+
+    #deleteBtn {
+        position: fixed;
+        padding: 18px 35px;
+        background: #e32636;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: left 0.12s ease, top 0.12s ease;
+        box-shadow: 0 5px 20px #e3263670;
+        z-index: 10;
+    }
+
+    #deleteBtn:hover {
+        background: #ff4655;
+    }
+
+    #message {
+        margin-top: 30px;
+        color: #ff4655;
+        font-size: 20px;
+        font-weight: bold;
+        min-height: 30px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Delete Roblox?</h1>
+    <p>Click the button below to permanently delete Roblox.</p>
+    <div id="message">Are you sure? 👀</div>
+</div>
+
+<button id="deleteBtn">DELETE ROBLOX</button>
+
+<script>
+    const btn = document.getElementById("deleteBtn");
+    const message = document.getElementById("message");
+
+    const messages = [
+        "Nice try 💀",
+        "NOPE 😂",
+        "You can't catch me!",
+        "Roblox refuses to leave.",
+        "STOP TRYING 😭",
+        "Not today!",
+        "Bro thought 💀",
+        "ROBLOX IS FOREVER"
+    ];
+
+    let attempts = 0;
+
+    function moveButton() {
+        const maxX = window.innerWidth - btn.offsetWidth;
+        const maxY = window.innerHeight - btn.offsetHeight;
+
+        const x = Math.random() * Math.max(0, maxX);
+        const y = Math.random() * Math.max(0, maxY);
+
+        btn.style.left = x + "px";
+        btn.style.top = y + "px";
+
+        message.textContent =
+            messages[attempts % messages.length];
+
+        attempts++;
+    }
+
+    // Initial position
+    moveButton();
+
+    // Run away when the mouse approaches
+    btn.addEventListener("mouseenter", moveButton);
+
+    // Run away when someone tries to touch it
+    btn.addEventListener("touchstart", function(e) {
+        e.preventDefault();
+        moveButton();
+    }, { passive: false });
+
+    // Just in case someone manages to click it
+    btn.addEventListener("click", function(e) {
+        e.preventDefault();
+        moveButton();
+    });
+
+    // Keep button inside screen after resizing
+    window.addEventListener("resize", moveButton);
+</script>
+
+</body>
+</html>
